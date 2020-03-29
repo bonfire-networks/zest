@@ -158,6 +158,31 @@ defmodule Zest do
   def rethrow(:catch, e, _), do: throw(e)
   def rethrow(:exit, e, _), do: exit(e)
 
+  @doc """
+  Iterates over a collections, calling the provided effectful
+  function with each item.
+  """
+  def each([l|list], fun) do
+    scope [each: l] do
+      fun.(l)
+      each(list, fun)
+    end
+  end
+  def each(_, _), do: nil
+  @doc """
+  Iterates over two collections, calling the provided effectful
+  function with each pair of items
+  """
+  def each(a, b, fun) when not is_list(a), do: each(Enum.to_list(a), b, fun)
+  def each(a, b, fun) when not is_list(b), do: each(a, Enum.to_list(b), fun)
+  def each([ a | as ], [b | bs], fun) do
+    scope [each: %{a: a, b: b}] do
+      fun.(a,b)
+      each(as, bs, fun)
+    end
+  end
+  def each(_, _, _), do: nil
+
   ### implementation
 
   @scopes_key Zest.Context

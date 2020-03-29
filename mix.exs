@@ -22,13 +22,24 @@ defmodule Zest.MixProject do
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
-    ]
-  end
-
-  defp deps do
-    [
-
+      package: [
+        description: "A fresh approach to testing",
+        licenses: ["Apache 2"],
+        links: %{
+          "Repository" => "https://github.com/commonspub/zest",
+          "Hexdocs" => "https://hexdocs.pm/zest"
+        }
+      ],
+      docs: [
+        name: "Gruff",
+        main: "readme",
+        source_url: "https://github.com/commonspub/zest",
+        extras: [
+          "README.md",
+          "CONDUCT.md"
+        ]
+      ],
+      deps: [{:ex_doc, ">= 0.0.0", only: :dev, runtime: false}],
     ]
   end
 

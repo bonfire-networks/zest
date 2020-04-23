@@ -31,7 +31,7 @@ defmodule Zest.MixProject do
         }
       ],
       docs: [
-        name: "Gruff",
+        name: "Zest",
         main: "readme",
         source_url: "https://github.com/commonspub/zest",
         extras: [

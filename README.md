@@ -7,7 +7,7 @@ A fresh approach to testing.
 Installation:
 
 ```elixir
-{:zest, "~> 0.1.1"}
+{:zest, "~> 0.1.2"}
 ```
 
 Example (taken from our test suite):

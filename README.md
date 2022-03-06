@@ -1,6 +1,6 @@
 # Zest
 
-A fresh approach to testing.
+`Zest` is a fresh approach to testing.
 
 ## Usage
 

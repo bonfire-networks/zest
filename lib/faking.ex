@@ -41,7 +41,9 @@ defmodule Zest.Faking do
   Stores seen things in the process dict (yes, *that* process dict)
   """
   def unused(faker, name, limit \\ 10)
-  def unused(_faker, name, 0), do: raise(Exception, message: "Tries exceeded: #{name}")
+
+  def unused(_faker, name, 0),
+    do: raise(Exception, message: "Tries exceeded: #{name}")
 
   def unused(faker, name, limit) when is_integer(limit) do
     used = get_used(name)
@@ -75,7 +77,8 @@ defmodule Zest.Faking do
   @doc false
   def get_used(name), do: Process.get(used_key(name), [])
   @doc false
-  def set_used(name, used) when is_list(used), do: Process.put(used_key(name), used)
+  def set_used(name, used) when is_list(used),
+    do: Process.put(used_key(name), used)
 
   # support for `sequential/2`
 
@@ -86,5 +89,7 @@ defmodule Zest.Faking do
 
   defp seq_key(name), do: {__MODULE__, {:seq, name}}
   defp get_seq(name, default), do: Process.get(seq_key(name), default)
-  defp set_seq(name, seq) when is_integer(seq), do: Process.put(seq_key(name), seq)
+
+  defp set_seq(name, seq) when is_integer(seq),
+    do: Process.put(seq_key(name), seq)
 end

@@ -20,13 +20,13 @@ defmodule ZestTest do
 
   @tag :manual
   test "scope fails spectacularly" do
-    scope [this: %{is: :a}, test: :case] do
-      scope [error: :this_should_not_show] do
+    scope this: %{is: :a}, test: :case do
+      scope error: :this_should_not_show do
       end
-      scope [the: :order, must: :be_correct] do
-        scope [to: :pass], assert(true == false)
+
+      scope the: :order, must: :be_correct do
+        scope([to: :pass], assert(true == false))
       end
     end
   end
-
 end

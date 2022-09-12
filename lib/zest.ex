@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 defmodule Zest do
-
   @doc """
   Add some debug information to the context for the duration of a
   block or expression. If a `raise`, `throw` or `exit` occurs, the
@@ -119,7 +118,8 @@ defmodule Zest do
   end
 
   @type intercept_type :: :rescue | :catch | :exit
-  @type interceptor :: (intercept_type, error :: term, maybe_stacktrace :: term -> term)
+  @type interceptor ::
+          (intercept_type, error :: term, maybe_stacktrace :: term -> term)
 
   @doc "Catches errors and exceptions, invoking an interceptor function"
   @spec intercept(function, interceptor) :: function
@@ -162,25 +162,29 @@ defmodule Zest do
   Iterates over a collections, calling the provided effectful
   function with each item.
   """
-  def each([l|list], fun) do
-    scope [each: l] do
+  def each([l | list], fun) do
+    scope each: l do
       fun.(l)
       each(list, fun)
     end
   end
+
   def each(_, _), do: nil
+
   @doc """
   Iterates over two collections, calling the provided effectful
   function with each pair of items
   """
   def each(a, b, fun) when not is_list(a), do: each(Enum.to_list(a), b, fun)
   def each(a, b, fun) when not is_list(b), do: each(a, Enum.to_list(b), fun)
-  def each([ a | as ], [b | bs], fun) do
-    scope [each: %{a: a, b: b}] do
-      fun.(a,b)
+
+  def each([a | as], [b | bs], fun) do
+    scope each: %{a: a, b: b} do
+      fun.(a, b)
       each(as, bs, fun)
     end
   end
+
   def each(_, _, _), do: nil
 
   ### implementation

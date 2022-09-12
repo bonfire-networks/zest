@@ -39,8 +39,7 @@ defmodule Zest.MixProject do
           "CONDUCT.md"
         ]
       ],
-      deps: [{:ex_doc, ">= 0.0.0", only: :dev, runtime: false}],
+      deps: [{:ex_doc, ">= 0.0.0", only: :dev, runtime: false}]
     ]
   end
-
 end
